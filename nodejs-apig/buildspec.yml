@@ -1,0 +1,22 @@
+# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing Mocha...
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Creating Infra before deploying lambda (S3 and Lambda function)
+      - ./2-deploy.sh
+  post_build:
+    commands:
+      - echo Build completed on `date`
